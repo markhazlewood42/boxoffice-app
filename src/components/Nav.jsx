@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 
 const LINKS = [
     {
-        "text": "Home",
-        "to": "/"
+        "title": "Home",
+        "path": "/"
     },
     {
-        "text": "Starred",
-        "to": "/starred"
+        "title": "Starred",
+        "path": "/starred"
     }
 ]
 
@@ -19,9 +19,9 @@ const Nav = () => {
                     // Iterate through the LINKS array, rendering a <Link>
                     // in an <li> item for each entry.
                     LINKS.map(item => 
-                        <li key={item.to}>
-                            <Link to={item.to}>
-                                {item.text}
+                        <li key={item.path}>
+                            <Link to={item.path}>
+                                {item.title}
                             </Link>
                         </li>)
                 }

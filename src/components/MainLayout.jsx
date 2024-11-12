@@ -8,7 +8,8 @@ const MainLayout = () => {
             <Nav />
             <AppTitle />
 
-            {/* Fallthrough to render the appropriate child component for the current route */}
+            {/* <Outlet> is a fallthrough to render the appropriate child 
+            component for the current route */}
             <Outlet />
         </div>
     );

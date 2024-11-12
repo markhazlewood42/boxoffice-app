@@ -14,7 +14,9 @@ function App() {
 
       <Route path="*" element={ <div>Not found</div> } />
 
-      {/* <Route path="/" element={<App />}>
+      {/* Some notes from the React Router docs:
+      
+      <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="teams" element={<Teams />}>
           <Route path=":teamId" element={<Team />} />
