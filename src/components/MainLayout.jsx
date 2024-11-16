@@ -3,16 +3,16 @@ import Nav from './Nav';
 import AppTitle from './AppTitle';
 
 const MainLayout = () => {
-  return (
-    <div>
-      <Nav />
-      <AppTitle />
+   return (
+      <div>
+         <Nav />
+         <AppTitle />
 
-      {/* <Outlet> is a fallthrough to render the appropriate child 
+         {/* <Outlet> is a fallthrough to render the appropriate child 
             component for the current route */}
-      <Outlet />
-    </div>
-  );
+         <Outlet />
+      </div>
+   );
 };
 
 export default MainLayout;
