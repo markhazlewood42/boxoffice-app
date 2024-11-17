@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import * as tvMaze from '../api/tvmaze.js';
 import SearchForm from '../components/SearchForm.jsx';
+import ShowsGrid from '../components/shows/ShowsGrid.jsx';
+import ActorsGrid from '../components/actors/ActorsGrid.jsx';
 
 const Home = () => {
    // Set up some state vars
@@ -33,16 +35,15 @@ const Home = () => {
       if (apiDataError) {
          return <div>Error occurred: {apiDataError.message}</div>;
       }
+      else if (apiData?.length === 0) {
+         return <div>No results</div>
+      }
       else if (apiData) {
          if (apiData[0].show) {
-            return apiData.map((data) => (
-               <div key={data.show.id}>{data.show.name}</div>
-            ));
+            return (<ShowsGrid shows={apiData} />);
          }
          else if (apiData[0].person) {
-            return apiData.map((data) => (
-               <div key={data.person.id}>{data.person.name}</div>
-            ));
+            return (<ActorsGrid actors={apiData} />);
          }
       }
       return null;
