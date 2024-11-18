@@ -12,3 +12,7 @@ export const searchForShows = (searchString) => {
 export const searchForPeople = (searchString) => {
    return apiGet(`/search/people?q=${searchString}`);
 };
+
+export const getShowById = (showId) => {
+   return apiGet(`/shows/${showId}`);
+};

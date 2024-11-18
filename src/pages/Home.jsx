@@ -36,14 +36,14 @@ const Home = () => {
          return <div>Error occurred: {apiDataError.message}</div>;
       }
       else if (apiData?.length === 0) {
-         return <div>No results</div>
+         return <div>No results</div>;
       }
       else if (apiData) {
          if (apiData[0].show) {
-            return (<ShowsGrid shows={apiData} />);
+            return <ShowsGrid shows={apiData} />;
          }
          else if (apiData[0].person) {
-            return (<ActorsGrid actors={apiData} />);
+            return <ActorsGrid actors={apiData} />;
          }
       }
       return null;
