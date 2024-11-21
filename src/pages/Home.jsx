@@ -1,33 +1,36 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import * as tvMaze from '../api/tvmaze.js';
 import SearchForm from '../components/SearchForm.jsx';
 import ShowsGrid from '../components/shows/ShowsGrid.jsx';
 import ActorsGrid from '../components/actors/ActorsGrid.jsx';
 
 const Home = () => {
-   // Set up some state vars
-   const [apiData, setApiData] = useState(null);
-   const [apiDataError, setApiDataError] = useState(null);
+   const [searchQuery, setSearchQuery] = useState(null);
+
+   // Use query lib to fetch show data
+   const { data: apiData, error: apiDataError } = useQuery({
+      // Rerun whenever searchQuery changes
+      queryKey: ['search', searchQuery],
+
+      // Query depends on value of searchQuery.searchOption
+      queryFn: () => {
+         if (searchQuery.searchOption === 'shows') {
+            return tvMaze.searchForShows(searchQuery.searchString);
+         }
+         else if (searchQuery.searchOption === 'people') {
+            return tvMaze.searchForPeople(searchQuery.searchString);
+         }
+         return null;
+      },
+      
+      // Disabled as long as searchQuery is null
+      enabled: !!searchQuery
+   });
 
    // Handle search form submit
    const onSearchFormSubmit = async ({ searchString, searchOption }) => {
-      try {
-         // Clear any previous error states
-         setApiDataError(null);
-
-         // Search TV API depending on selected search filter
-         let result = null;
-         if (searchOption === 'shows') {
-            result = await tvMaze.searchForShows(searchString);
-         }
-         else if (searchOption === 'people') {
-            result = await tvMaze.searchForPeople(searchString);
-         }
-         setApiData(result);
-      }
-      catch (error) {
-         setApiDataError(error);
-      }
+      setSearchQuery({ searchString, searchOption });
    };
 
    // Render search results if they exist, or a search error, or nothing
