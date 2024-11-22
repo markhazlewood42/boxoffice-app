@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 const ShowCard = ({ id, name, image, summary }) => {
    // Show the first ten words of the summary, stripping out HTML
    const strippedSummary = summary
@@ -16,7 +14,7 @@ const ShowCard = ({ id, name, image, summary }) => {
          <p>{strippedSummary}</p>
 
          <div>
-            <Link to={`/show/${id}`}>Read more</Link>
+            <a href={`/show/${id}`} target='_blank' rel='noreferrer'>Read more</a>
             <button type="button">Star me</button>
          </div>
       </div>
