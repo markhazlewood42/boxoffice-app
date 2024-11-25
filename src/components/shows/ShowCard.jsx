@@ -14,13 +14,11 @@ const ShowCard = ({ id, name, image, summary, isStarred, onStarMeClick }) => {
          <p>{strippedSummary}</p>
 
          <div>
-            <a href={`/show/${id}`} target='_blank' rel='noreferrer'>
+            <a href={`/show/${id}`} target="_blank" rel="noreferrer">
                Read more
             </a>
             <button type="button" onClick={() => onStarMeClick(id)}>
-               {
-                  isStarred ? 'Unstar me' : 'Star me'
-               }
+               {isStarred ? 'Unstar me' : 'Star me'}
             </button>
          </div>
       </div>

@@ -10,9 +10,9 @@ const Show = () => {
    const { showId } = useParams();
 
    // Use query lib to fetch show data
-   const {data: showData, error: fetchError } = useQuery({
+   const { data: showData, error: fetchError } = useQuery({
       queryKey: ['show', showId],
-      queryFn: () => tvMaze.getShowById(showId)
+      queryFn: () => tvMaze.getShowById(showId),
    });
 
    // Render page depending on show data or error states
@@ -27,20 +27,19 @@ const Show = () => {
    else if (showData) {
       return (
          <div>
+            <Link to="/">Go back to home</Link>
 
-            <Link to='/'>Go back to home</Link>
-
-            <ShowMainData 
+            <ShowMainData
                image={showData.image}
-               name={showData.name} 
-               rating={showData.rating} 
+               name={showData.name}
+               rating={showData.rating}
                summary={showData.summary}
                genres={showData.genres}
             />
-            
+
             <div>
                <h2>Details</h2>
-               <ShowDetails 
+               <ShowDetails
                   status={showData.status}
                   premiered={showData.premiered}
                   network={showData.network}
@@ -49,16 +48,12 @@ const Show = () => {
 
             <div>
                <h2>Seasons</h2>
-               <Seasons 
-                  seasons={showData._embedded.seasons}
-               />
+               <Seasons seasons={showData._embedded.seasons} />
             </div>
 
             <div>
                <h2>Cast</h2>
-               <Cast 
-                  cast={showData._embedded.cast}
-               />
+               <Cast cast={showData._embedded.cast} />
             </div>
          </div>
       );

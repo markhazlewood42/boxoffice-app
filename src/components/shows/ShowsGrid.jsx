@@ -2,15 +2,18 @@ import { useStarredShows } from '../../lib/useStarredShows';
 import ShowCard from './ShowCard';
 
 const ShowsGrid = ({ shows }) => {
-   const [starredShows, dispatchStarred] = useStarredShows();
+   const [starredShows, dispatchStarredChanged] = useStarredShows();
 
    const onStarMeClick = (showId) => {
       const isStarred = starredShows.includes(showId);
+
+      // Dispatch state change to the reducer that manages starred
+      // shows state.
       if (isStarred) {
-         dispatchStarred({ type: 'UNSTAR', id: showId })
+         dispatchStarredChanged({ type: 'UNSTAR', id: showId });
       }
       else {
-         dispatchStarred({ type: 'STAR', id: showId })
+         dispatchStarredChanged({ type: 'STAR', id: showId });
       }
    };
 
@@ -23,9 +26,7 @@ const ShowsGrid = ({ shows }) => {
                id={item.show.id}
                name={item.show.name}
                image={
-                  item.show.image
-                     ? item.show.image.medium
-                     : '/not-found-image.png'
+                  item.show.image ? item.show.image.medium : '/not-found-image.png'
                }
                summary={item.show.summary}
                isStarred={starredShows.includes(item.show.id)}

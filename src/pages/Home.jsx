@@ -23,9 +23,9 @@ const Home = () => {
          }
          return null;
       },
-      
+
       // Disabled as long as searchQuery is null
-      enabled: !!searchQuery
+      enabled: !!searchQuery,
    });
 
    // Handle search form submit
