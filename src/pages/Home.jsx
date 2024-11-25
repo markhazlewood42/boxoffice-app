@@ -9,7 +9,7 @@ const Home = () => {
    const [searchQuery, setSearchQuery] = useState(null);
 
    // Use query lib to fetch show data
-   const { data: apiData, error: apiDataError } = useQuery({
+   const { data: searchData, error: searchError } = useQuery({
       // Rerun whenever searchQuery changes
       queryKey: ['search', searchQuery],
 
@@ -35,18 +35,18 @@ const Home = () => {
 
    // Render search results if they exist, or a search error, or nothing
    const renderSearchResults = () => {
-      if (apiDataError) {
-         return <div>Error occurred: {apiDataError.message}</div>;
+      if (searchError) {
+         return <div>Error occurred: {searchError.message}</div>;
       }
-      else if (apiData?.length === 0) {
+      else if (searchData?.length === 0) {
          return <div>No results</div>;
       }
-      else if (apiData) {
-         if (apiData[0].show) {
-            return <ShowsGrid shows={apiData} />;
+      else if (searchData) {
+         if (searchData[0].show) {
+            return <ShowsGrid shows={searchData} />;
          }
-         else if (apiData[0].person) {
-            return <ActorsGrid actors={apiData} />;
+         else if (searchData[0].person) {
+            return <ActorsGrid actors={searchData} />;
          }
       }
       return null;
