@@ -1,4 +1,4 @@
-import { useReducerWithLS } from './customHooks';
+import { useReducerWithLocalStorage } from './customHooks';
 
 /*********************************************** */
 // Set up a reducer for handling starring and unstarring shows.
@@ -19,5 +19,5 @@ const starredShowsReducer = (currentStarredShows, action) => {
 };
 
 export const useStarredShows = () => {
-   return useReducerWithLS(starredShowsReducer, [], 'starredShows');
+   return useReducerWithLocalStorage(starredShowsReducer, [], 'starredShows');
 };

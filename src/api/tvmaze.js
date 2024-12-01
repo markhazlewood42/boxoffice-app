@@ -16,3 +16,15 @@ export const searchForPeople = (searchString) => {
 export const getShowById = (showId) => {
    return apiGet(`/shows/${showId}?embed[]=seasons&embed[]=cast`);
 };
+
+export const getMultipleShowsById = async (idArray) => {
+   // Get an array of promises by calling getShowById for each 
+   // show ID in the starred array.
+   const promises = idArray.map((showId) => {
+      return apiGet(`/shows/${showId}`);
+   });
+
+   // Resolves an array of promises in parallel
+   // Returns an array with results in the same order as the promise array
+   return Promise.all(promises);
+};
