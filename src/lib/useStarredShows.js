@@ -18,6 +18,8 @@ const starredShowsReducer = (currentStarredShows, action) => {
    }
 };
 
+// Convenience wrapper for any component to get or set the current list of
+// starred shows from local storage.
 export const useStarredShows = () => {
    return useReducerWithLocalStorage(starredShowsReducer, [], 'starredShows');
 };
