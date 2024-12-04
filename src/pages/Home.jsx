@@ -55,6 +55,7 @@ const Home = () => {
    // Main component render
    return (
       <div>
+
          <SearchForm searchHandler={onSearchFormSubmit} />
 
          <div>{renderSearchResults()}</div>
