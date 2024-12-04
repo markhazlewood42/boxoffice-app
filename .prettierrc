@@ -3,6 +3,7 @@
     "prettier-plugin-brace-style"
   ],
   "trailingComma": "es5",
+  "printWidth": 85,
   "tabWidth": 3,
   "semi": true,
   "singleQuote": true,
