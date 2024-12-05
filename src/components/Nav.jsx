@@ -61,14 +61,14 @@ const StyledNavLink = styled(NavLink)`
       left: 0%;
       bottom: 0;
       background-color: ${({ theme }) => theme.mainColors.blue};
-      animation: slide-in 0.3s ease-in forwards;
-      @keyframes slide-in {
+      animation: expand-from-center 0.2s ease-out forwards;
+      @keyframes expand-from-center {
         from {
           left: 50%;
           width: 0;
         }
         to {
-          left: 0%;
+          left: 0;
           width: 100%;
         }
       }

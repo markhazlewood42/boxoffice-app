@@ -4,6 +4,7 @@ import * as tvMaze from '../api/tvmaze.js';
 import SearchForm from '../components/SearchForm.jsx';
 import ShowsGrid from '../components/shows/ShowsGrid.jsx';
 import ActorsGrid from '../components/actors/ActorsGrid.jsx';
+import { TextCenter } from '../components/common/TextCenter.jsx';
 
 const Home = () => {
    const [searchQuery, setSearchQuery] = useState(null);
@@ -36,7 +37,7 @@ const Home = () => {
    // Render search results if they exist, or a search error, or nothing
    const renderSearchResults = () => {
       if (searchError) {
-         return <div>Error occurred: {searchError.message}</div>;
+         return <TextCenter>Error occurred: {searchError.message}</TextCenter>;
       }
       else if (searchData?.length === 0) {
          return <div>No results</div>;
