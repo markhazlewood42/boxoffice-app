@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { SearchCard, SearchImgWrapper } from "../common/SearchCard"
 import { StarIcon } from "../common/StarIcon"
+import { useRef } from "react";
 
 const ShowCard = ({ id, name, image, summary, isStarred, onStarMeClick }) => {
    // Show the first ten words of the summary, stripping out HTML
@@ -8,22 +9,45 @@ const ShowCard = ({ id, name, image, summary, isStarred, onStarMeClick }) => {
       ? summary.split(' ').slice(0, 10).join(' ').replace(/<.+?>/g, '') + "..."
       : 'No summary';
 
+   // useRef is used to reference a React element in the DOM. 
+   // Equivalent to doc.getElementById.
+   const starBtnRef = useRef();
+
+   const handleStarClick = () => {
+      onStarMeClick(id);
+
+      // Remove star button animation class if it's already starred when
+      // this component mounts (meaning the animation already happened)
+      const starBtnElement = starBtnRef.current
+      if (starBtnElement) {
+         if (isStarred) {
+            starBtnElement.classList.remove('animate');
+         }
+         else {
+            starBtnElement.classList.add('animate');
+         }
+      }
+   };
+
    return (
       <SearchCard>
-         <SearchImgWrapper>
-            <img src={image} alt={name} />
-         </SearchImgWrapper>
+         <ShowLink>
+            <a href={`/show/${id}`} target="_blank" rel="noreferrer">
+               <SearchImgWrapper>
+                  <img src={image} alt={name} />
+               </SearchImgWrapper>
+            </a>
+         </ShowLink>
 
          <h1>{name}</h1>
          <p>{strippedSummary}</p>
 
          <ActionSection>
-            <a href={`/show/${id}`} target="_blank" rel="noreferrer">
+            {/* <a href={`/show/${id}`} target="_blank" rel="noreferrer">
                Read more
-            </a>
-            <StarBtn type="button" onClick={() => onStarMeClick(id)}>
-               {/* {isStarred ? 'Unstar me' : 'Star me'} */}
-               <StarIcon active={isStarred} />
+            </a> */}
+            <StarBtn ref={starBtnRef} type="button" onClick={handleStarClick} >
+               <StarIcon active={isStarred.toString()} />
             </StarBtn>
          </ActionSection>
       </SearchCard>
@@ -33,6 +57,21 @@ const ShowCard = ({ id, name, image, summary, isStarred, onStarMeClick }) => {
 export default ShowCard;
 
 // Styling components *********************************************************
+
+const ShowLink = styled.div`
+   cursor: pointer;
+   &:hover {
+      animation: showPop 0.2s ease-out forwards;
+      @keyframes showPop {
+         0% {
+            transform: scale(1);
+         }
+         100% {
+            transform: scale(1.025);
+         }
+      }
+   }
+`;
 
 const ActionSection = styled.div`
   margin-top: 15px;
@@ -60,5 +99,21 @@ const StarBtn = styled.button`
   align-items: center;
   &:hover {
     cursor: pointer;
+  }
+  &.animate {
+   ${StarIcon} {
+      animation: starPop 0.3s ease-in-out forwards;
+      @keyframes starPop {
+         0% {
+            transform: scale(1);
+         }
+         50% {
+            transform: scale(1.5);
+         }
+         100% {
+            transform: scale(1);
+         }
+      }
+   }
   }
 `;
