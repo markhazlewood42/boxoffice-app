@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { SearchCard, SearchImgWrapper } from "../common/SearchCard"
 import { StarIcon } from "../common/StarIcon"
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 
 const ShowCard = ({ id, name, image, summary, isStarred, onStarMeClick }) => {
    // Show the first ten words of the summary, stripping out HTML
@@ -32,20 +33,17 @@ const ShowCard = ({ id, name, image, summary, isStarred, onStarMeClick }) => {
    return (
       <SearchCard>
          <ShowLink>
-            <a href={`/show/${id}`} target="_blank" rel="noreferrer">
+            <Link to={`/show/${id}`} target="_blank" rel="noreferrer">
                <SearchImgWrapper>
                   <img src={image} alt={name} />
                </SearchImgWrapper>
-            </a>
+            </Link>
          </ShowLink>
 
          <h1>{name}</h1>
          <p>{strippedSummary}</p>
 
          <ActionSection>
-            {/* <a href={`/show/${id}`} target="_blank" rel="noreferrer">
-               Read more
-            </a> */}
             <StarBtn ref={starBtnRef} type="button" onClick={handleStarClick} >
                <StarIcon active={isStarred.toString()} />
             </StarBtn>
